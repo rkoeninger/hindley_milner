@@ -1,0 +1,7 @@
+(rule
+ ((targets (hm.output))
+  (action (with-stdout-to %{targets} (run %{bin:hm})))))
+
+(alias
+ ((name runtest)
+  (action (run diff -uw %{dep:hm.expected} %{dep:hm.output}))))

@@ -1,0 +1,11 @@
+opam-version: "1.2"
+version: "1.0"
+maintainer: "rkoeninger@att.net"
+authors: ["Robert Koeninger"]
+homepage: "https://github.com/rkoeninger/hindley_milner"
+bug-reports: "https://github.com/rkoeninger/hindley_milner/issues"
+dev-repo: "https://github.com/rkoeninger/hindley_milner.git"
+license: "MIT"
+build: [
+  ["jbuilder" "build" "--only" "hm" "--root" "." "-j" jobs "@install"]
+]
