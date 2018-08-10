@@ -1,13 +1,13 @@
 $ jbuilder build @install @runtest
     ocamldep bin/main.depends.ocamldep-output
-    ocamldep lib/hello_world.depends.ocamldep-output
-      ocamlc lib/hello_world.{cmi,cmo,cmt}
-    ocamlopt lib/hello_world.{cmx,o}
+    ocamldep lib/hm.depends.ocamldep-output
+      ocamlc lib/hm.{cmi,cmo,cmt}
+    ocamlopt lib/hm.{cmx,o}
       ocamlc bin/main.{cmi,cmo,cmt}
-      ocamlc lib/hello_world.cma
-    ocamlopt lib/hello_world.{a,cmxa}
+      ocamlc lib/hm.cma
+    ocamlopt lib/hm.{a,cmxa}
     ocamlopt bin/main.{cmx,o}
-    ocamlopt lib/hello_world.cmxs
+    ocamlopt lib/hm.cmxs
     ocamlopt bin/main.exe
- hello_world test/hello_world.output
+          hm test/hm.output
         diff alias test/runtest
