@@ -1,4 +1,4 @@
-$ jbuilder build @install @runtest
+$ dune build @install @runtest
     ocamldep bin/main.depends.ocamldep-output
     ocamldep lib/hm.depends.ocamldep-output
       ocamlc lib/hm.{cmi,cmo,cmt}
