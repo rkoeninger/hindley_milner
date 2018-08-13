@@ -1,7 +1,10 @@
-(rule
- ((targets (hm.output))
-  (action (with-stdout-to %{targets} (run %{bin:hm})))))
+(executable
+ (name run_tests)
+ (libraries
+  alcotest
+  hm))
 
 (alias
- ((name runtest)
-  (action (run diff -uw %{dep:hm.expected} %{dep:hm.output}))))
+ (name runtest)
+ (deps run_tests.exe)
+ (action (run %{deps} -q --color=always)))

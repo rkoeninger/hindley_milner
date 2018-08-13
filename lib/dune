@@ -1,3 +1,4 @@
 (library
- ((name        hm)
-  (public_name hm)))
+ (name hm)
+ (public_name hm)
+ (synopsis "Example implementation of Hindley-Milner style type inference"))
