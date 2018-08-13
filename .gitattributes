@@ -1,1 +1,2 @@
-run.t   linguist-vendored
+*.mli  linguist-language=OCaml
+*.ml   linguist-language=OCaml
