@@ -12,7 +12,7 @@ addons:
       - ocaml
 install:
   - export OPAMYES=true
-  - export PATH=$PATH:~/.bin:~/.opam/system/bin
+  - export PATH=$PATH:~/.bin:~/.opam/4.05.0/bin
   - if [ ! -d "~/.bin" ]; then
       wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s ~/.bin;
     fi
@@ -21,4 +21,4 @@ install:
       opam install ocp-indent dune alcotest;
     fi
 script:
-  - ~/.opam/system/bin/dune build
+  - ~/.opam/4.05.0/bin/dune build
