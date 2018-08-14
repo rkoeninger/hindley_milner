@@ -9,6 +9,8 @@ addons:
       - opam
 install:
   - export PATH=$PATH:~/.opam/system/bin
+  - opam init
+  - opam update
   - opam install ocp-indent dune alcotest
 script:
   - dune build
