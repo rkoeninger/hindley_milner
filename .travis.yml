@@ -6,8 +6,8 @@ addons:
     packages:
       - m4
       - ocaml
-      - opam
 install:
+  - wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin
   - export PATH=$PATH:~/.opam/system/bin
   - opam init
   - opam update
