@@ -21,4 +21,4 @@ install:
       opam install ocp-indent dune alcotest;
     fi
 script:
-  - dune build
+  - ~/.opam/system/bin/dune build
