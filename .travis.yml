@@ -1,0 +1,14 @@
+notifications:
+  email: false
+language: generic
+addons:
+  apt:
+    packages:
+      - m4
+      - ocaml
+      - opam
+install:
+  - export PATH=$PATH:~/.opam/system/bin
+  - opam install ocp-indent dune alcotest
+script:
+  - dune build
