@@ -1,16 +1,23 @@
 notifications:
   email: false
 language: generic
+cache:
+  directories:
+    - ~/.bin
+    - ~/.opam
 addons:
   apt:
     packages:
       - m4
       - ocaml
 install:
-  - wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s ~/bin
-  - export PATH=$PATH:~/bin:~/.opam/system/bin
-  - opam init
-  - opam update
-  - opam install ocp-indent dune alcotest
+  - export PATH=$PATH:~/.bin:~/.opam/system/bin
+  - if [ ! -d "~/.bin" ]; then
+      wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s ~/.bin;
+    fi
+  - if [ ! -d "~/.opam" ]; then
+      opam update;
+      opam install ocp-indent dune alcotest;
+    fi
 script:
   - dune build
