@@ -9,8 +9,7 @@ type syn_expr =
 
 let check_type _ _ = true
 
-let infer_type expr =
-  match expr with
+let infer_type = function
   | Var _ -> Some "var"
   | App(_, _) -> Some "app"
   | Abs(_, _) -> Some "abs"

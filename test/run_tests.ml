@@ -1,3 +1,5 @@
+open Hm
+
 let check msg x = Alcotest.(check bool) msg true x
 
 let stuff () =
