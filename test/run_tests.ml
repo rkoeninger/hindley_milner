@@ -2,16 +2,22 @@ open Hm
 
 let check msg x = Alcotest.(check bool) msg true x
 
-let stuff () =
-  check "2. > 1." (2. > 1.);
-  check "1. = 1." (1. = 1.)
+exception Opt_none
+
+let get_opt = function
+  | Some x -> x
+  | None -> raise Opt_none
+
+let inference () =
+  check "Dummy infer" (type_of_name "var" = (var_expr "x" |> infer_type));
+  check "Trivial infer of ann" (type_of_name "t" = (ann_expr (type_of_name "t" |> get_opt) (var_expr "x") |> infer_type))
 
 let tests = [
-  "stuff", `Quick, stuff;
+  "inference", `Quick, inference;
 ]
 
 let test_suites: unit Alcotest.test list = [
-  "stuff", tests
+  "inference", tests
 ]
 
-let () = Alcotest.run "hm" test_suites
+let () = Alcotest.run "Hm" test_suites
