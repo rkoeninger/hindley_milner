@@ -1,6 +1,6 @@
 open Hm
 
-let check msg x = Alcotest.(check bool) msg true x
+let (<<) f g x = f(g(x))
 
 exception Opt_none
 
@@ -8,16 +8,15 @@ let get_opt = function
   | Some x -> x
   | None -> raise Opt_none
 
-let inference () =
-  check "Dummy infer" (type_of_name "var" = (var_expr "x" |> infer_type));
-  check "Trivial infer of ann" (type_of_name "t" = (ann_expr (type_of_name "t" |> get_opt) (var_expr "x") |> infer_type))
+let test desc f = desc, `Quick, (Alcotest.(check bool) desc true << f)
 
-let tests = [
-  "inference", `Quick, inference;
-]
-
-let test_suites: unit Alcotest.test list = [
-  "inference", tests
-]
-
-let () = Alcotest.run "Hm" test_suites
+let () = Alcotest.run "Hm" [
+    "inference", [
+      test "var infer" (fun () ->
+        type_of_name "var" = (var_expr "x" |> infer_type)
+      );
+      test "ann infer" (fun () ->
+        type_of_name "t" = (ann_expr (type_of_name "t" |> get_opt) (var_expr "x") |> infer_type)
+      );
+    ]
+  ]
