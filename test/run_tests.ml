@@ -12,6 +12,9 @@ let test desc f = desc, `Quick, (Alcotest.(check bool) desc true << f)
 
 let () = Alcotest.run "Hm" [
     "inference", [
+      test "lit infer" (fun () ->
+        type_of_name "int" = (lit_expr (lit_int 5) |> infer_type)
+      );
       test "var infer" (fun () ->
         type_of_name "var" = (var_expr "x" |> infer_type)
       );
