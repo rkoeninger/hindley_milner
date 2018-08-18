@@ -12,6 +12,12 @@ type syn_expr =
   | Let of string * syn_expr * syn_expr
   | Ann of syn_type * syn_expr
 
+type syn_decl = string * syn_expr
+type syn_prog = syn_decl list * syn_expr
+
+let decl_of name expr = (name, expr)
+let prog_of decls main = (decls, main)
+
 let type_of_name name = Some name
 let name_of_type name = name
 
