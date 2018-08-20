@@ -13,13 +13,14 @@ let test desc f = desc, `Quick, (Alcotest.(check bool) desc true << f)
 let () = Alcotest.run "Hm" [
     "inference", [
       test "lit infer" (fun () ->
-        type_of_name "int" = (lit_expr (lit_int 5) |> infer_type)
+        type_int = (lit_expr (lit_int 5) |> infer_type |> get_opt)
       );
       test "var infer" (fun () ->
-        type_of_name "var" = (var_expr "x" |> infer_type)
+        type_con "var" = (var_expr "x" |> infer_type |> get_opt)
       );
       test "ann infer" (fun () ->
-        type_of_name "t" = (ann_expr (type_of_name "t" |> get_opt) (var_expr "x") |> infer_type)
+        let t = type_con "t" in
+          t = (ann_expr t (var_expr "x") |> infer_type |> get_opt)
       );
     ]
   ]

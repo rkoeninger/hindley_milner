@@ -1,4 +1,7 @@
-type syn_type = string
+type syn_type =
+  | TypeVar of string
+  | TypeCon of string
+  | TypeArr of syn_type * syn_type
 
 type syn_lit =
   | Bool of bool
@@ -18,11 +21,20 @@ type syn_prog = syn_decl list * syn_expr
 let decl_of name expr = (name, expr)
 let prog_of decls main = (decls, main)
 
-let type_of_name name = Some name
-let name_of_type name = name
+let rec name_of_type = function
+  | TypeVar name -> name
+  | TypeCon name -> name
+  | TypeArr(k, t) -> name_of_type k ^ " " ^ name_of_type t
 
 let lit_bool b = Bool b
 let lit_int i = Int i
+
+let type_var name = TypeVar name
+let type_con name = TypeCon name
+let type_arr k t = TypeArr(k, t)
+
+let type_int = TypeCon "int"
+let type_bool = TypeCon "bool"
 
 let lit_expr lit = Lit lit
 let var_expr name = Var name
@@ -33,11 +45,11 @@ let ann_expr t expr = Ann(t, expr)
 
 let check_type _ _ = true
 
-let infer_type = function
-  | Lit(Bool _) -> Some "bool"
-  | Lit(Int _) -> Some "int"
-  | Var _ -> Some "var"
-  | App(_, _) -> Some "app"
-  | Lam(_, _) -> Some "lam"
-  | Let(_, _, _) -> Some "let"
+let rec infer_type = function
+  | Lit(Bool _) -> Some type_bool
+  | Lit(Int _) -> Some type_int
+  | Var _ -> Some(type_con "var")
+  | App(_, _) -> Some(type_con "app")
+  | Lam(_, _) -> Some(type_con "lam")
+  | Let(_, _, body) -> infer_type body
   | Ann(t, _) -> Some t
