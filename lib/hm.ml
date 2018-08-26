@@ -3,6 +3,8 @@ type syn_type =
   | TypeCon of string
   | TypeArr of syn_type * syn_type
 
+type syn_scheme = string list * syn_type
+
 type syn_lit =
   | Bool of bool
   | Int of int
@@ -17,6 +19,16 @@ type syn_expr =
 
 type syn_decl = string * syn_expr
 type syn_prog = syn_decl list * syn_expr
+
+type syn_env = (string * syn_scheme) list
+
+let empty_env = []
+let add_env name sch env = (name, sch) :: env
+let rec lookup_env name env =
+  match env with
+  | [] -> None
+  | (n, s) :: _ when n == name -> Some s
+  | _ :: rest -> lookup_env name rest
 
 let decl_of name expr = (name, expr)
 let prog_of decls main = (decls, main)
@@ -35,6 +47,8 @@ let type_arr k t = TypeArr(k, t)
 
 let type_int = TypeCon "int"
 let type_bool = TypeCon "bool"
+
+let for_all vars t = (vars, t)
 
 let lit_expr lit = Lit lit
 let var_expr name = Var name
