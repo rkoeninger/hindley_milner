@@ -1,6 +1,9 @@
 notifications:
   email: false
 language: node_js
-script:
+node_js:
+  - "lts/*"
+install:
   - npm install
+script:
   - npm run build
