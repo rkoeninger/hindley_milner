@@ -1,9 +1,19 @@
-[![Build Status](https://travis-ci.org/rkoeninger/hindley_milner.svg?branch=master)](https://travis-ci.org/rkoeninger/hindley_milner)
+# Build
 
-# Hindley-Milner Type Inference
+```
+npm run build
+```
 
-Example implementation of the Hindley-Milner type system.
+# Watch
 
-Project layout based on https://github.com/mjambon/dune-starter/tree/master/proj
+```
+npm run watch
+```
+
+# Editor
+
+If you use `vscode`, Press `Windows + Shift + B` it will build automatically
+
+# Sources
 
 Reference on implementing HM: http://dev.stephendiehl.com/fun/006_hindley_milner.html
