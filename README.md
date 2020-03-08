@@ -1,12 +1,14 @@
+[![Build Status](https://travis-ci.org/rkoeninger/hindley_milner.svg?branch=master)](https://travis-ci.org/rkoeninger/hindley_milner)
+
 # Build
 
-```
+```bash
 npm run build
 ```
 
-# Watch
+or
 
-```
+```bash
 npm run watch
 ```
 
