@@ -1,3 +1,5 @@
+type tvar
+type syn_op
 type syn_expr
 type syn_lit
 type syn_type
@@ -27,14 +29,14 @@ val type_int : syn_type
 val type_bool : syn_type
 
 (* TVar list -> Type -> Scheme *)
-val for_all : string list -> syn_type -> syn_scheme
+val for_all : tvar list -> syn_type -> syn_scheme
 
 val lit_expr : syn_lit -> syn_expr
 val var_expr : string -> syn_expr
 val app_expr : syn_expr -> syn_expr -> syn_expr
 val lam_expr : string -> syn_expr -> syn_expr
 val let_expr : string -> syn_expr -> syn_expr -> syn_expr
-val ann_expr : syn_type -> syn_expr -> syn_expr
+(* val ann_expr : syn_type -> syn_expr -> syn_expr *)
 
 val check_type : syn_type -> syn_expr -> bool
 val infer_type : syn_expr -> syn_type option
